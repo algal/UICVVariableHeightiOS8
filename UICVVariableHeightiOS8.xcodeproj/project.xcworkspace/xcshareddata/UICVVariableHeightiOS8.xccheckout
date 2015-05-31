@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>04CB391D-0574-4C02-880F-88C84C66F20E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>57B811BBFEA00B1ED9059004BE54123CAFBFBB7B</key>
+		<string>github.com:algal/UICVVariableHeightiOS8.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>UICVVariableHeightiOS8.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>57B811BBFEA00B1ED9059004BE54123CAFBFBB7B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:algal/UICVVariableHeightiOS8.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>57B811BBFEA00B1ED9059004BE54123CAFBFBB7B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>57B811BBFEA00B1ED9059004BE54123CAFBFBB7B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UICVVariableHeightiOS8</string>
+		</dict>
+	</array>
+</dict>
+</plist>

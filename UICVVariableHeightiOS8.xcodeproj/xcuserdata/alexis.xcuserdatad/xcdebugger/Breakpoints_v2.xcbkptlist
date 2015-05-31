@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UICVVariableHeightiOS8/MyCell.swift"
-            timestampString = "434925065.794253"
+            timestampString = "454730761.606818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "preferredLayoutSizeFittingSize(_:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "preferredLayoutSizeFittingWidth(_:)"
             landmarkType = "5">
             <Actions>
                <BreakpointActionProxy
@@ -35,12 +35,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UICVVariableHeightiOS8/MyCell.swift"
-            timestampString = "434925065.794253"
+            timestampString = "454730761.606818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "preferredLayoutSizeFittingSize(_:)"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "preferredLayoutSizeFittingWidth(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

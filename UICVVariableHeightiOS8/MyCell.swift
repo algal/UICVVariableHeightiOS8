@@ -8,11 +8,14 @@
 
 import UIKit
 
-class MyCell: UICollectionViewCell {
+class MyCell: UICollectionViewCell
+{
   
   let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
 
-  class func classReuseIdentifier() -> NSString { return "MyCell" }
+  override class func requiresConstraintBasedLayout() -> Bool { return true }
+  
+  class var classReuseIdentifier : String { return "MyCell" }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -33,43 +36,31 @@ class MyCell: UICollectionViewCell {
       fatalError("init(coder:) has not been implemented")
   }
   
-//  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes!
-//  {
-//    var attrs:UICollectionViewLayoutAttributes = super.preferredLayoutAttributesFittingAttributes(layoutAttributes)
-//
-////    let newSize = self.preferredLayoutSizeFittingSize(attrs.size)
-//    let newSize = self.preferredLayoutSizeFittingSize(CGSizeMake(200, attrs.size.height))
-//    let newSizeString = NSStringFromCGSize(newSize)
-//    NSLog(newSizeString)
-//    attrs.size  = newSize
-//    return attrs
-//  }
-  
-  
   /*
-  Computes the size the cell will need to to fit within targetSize.
+  Computes the size the cell needs to be, if it must be a given width
   
-  targetSize should be used to pass in a width.
+  @param targetWidth width the cell must be
 
   the returned size will have the same width, and the height which is
   calculated by Auto Layout so that the contents of the cell (i.e., text in the label)
   can fit within that width.
 
   */
-  func preferredLayoutSizeFittingSize(targetSize:CGSize) -> CGSize {
-    
-    // save original frame and preferredMaxLayoutWidth
+  func preferredLayoutSizeFittingWidth(targetWidth:CGFloat) -> CGSize {
+    NSLog("MyCell.preferredLayoutSizeFittingSize(targetSize:):ENTRY: called with targetWidth=%@", NSNumber(float: Float(targetWidth)))
+    // save original frame and preferredMaxLayoutWidth of the 
     let originalFrame = self.frame
     let originalPreferredMaxLayoutWidth = self.label.preferredMaxLayoutWidth
     
     // assert: targetSize.width has the required width of the cell
     
-    // step1: set the cell.frame to use that width
+    // step1: set the cell.frame to use that width, and an excessive height
     var frame = self.frame
-    frame.size = targetSize
+    frame.size = CGSize(width: targetWidth, height: 30000)
     self.frame = frame
 
-    // step2: layout the cell
+    // step2: layout the cell's subviews, based on the required width and excessive height
+    NSLog("MyCell.preferredLayoutSizeFittingWidth(targetWidth:): about to call layoutIfNeeded on the sizing cell")
     self.setNeedsLayout()
     self.layoutIfNeeded()
     self.label.preferredMaxLayoutWidth = self.label.bounds.size.width
@@ -81,16 +72,18 @@ class MyCell: UICollectionViewCell {
     // this causes the cell to compute the height it needs, which it does by asking the 
     // label what height it needs to wrap within its current bounds (which we just set).
     // (note that the label is getting its wrapping width from its bounds, not preferredMaxLayoutWidth)
+    NSLog("MyCell.preferredLayoutSizeFittingSize(targetSize:): about to call systemLayoutSizeFittingSize on the sizing cell")
     let computedSize = self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-    NSLog(NSStringFromCGSize(computedSize))
     // assert: computedSize has the needed height for the cell
 
     // Apple: "Only consider the height for cells, because the contentView isn't anchored correctly sometimes."
-    let newSize = CGSize(width:targetSize.width,height:computedSize.height)
+    let newSize = CGSize(width:targetWidth,height:computedSize.height)
 
     // restore old frame
     self.frame = originalFrame
     self.label.preferredMaxLayoutWidth = originalPreferredMaxLayoutWidth
+    
+    NSLog("MyCell.preferredLayoutSizeFittingSize(targetSize:): EXIT: returning size=%@",NSStringFromCGSize(newSize))
     return newSize
   }
 }

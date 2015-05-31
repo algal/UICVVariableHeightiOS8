@@ -8,13 +8,16 @@
 
 import UIKit
 
-let items = [
-  "Pharetra Dapibus Ornare Sollicitudin Risus",
-  "Ultricies Pellentesque",
-  "Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper nulla non metus auctor fringilla. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
-  "ciao bello"]
-
+//let items = [
+//  "Pharetra Dapibus Ornare Sollicitudin Risus",
+////  "Ultricies Pellentesque",
+////  "Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+////  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper nulla non metus auctor fringilla. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.",
+////  "ciao bello",
+//]
+//
+let itemsAll = Model().dataArray.map({ $0.body })
+let items = [itemsAll[0]]
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
@@ -22,10 +25,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.collectionView?.registerClass(MyCell.self, forCellWithReuseIdentifier: MyCell.classReuseIdentifier())
+    self.collectionView?.registerClass(MyCell.self, forCellWithReuseIdentifier: MyCell.classReuseIdentifier)
   }
   
-  // MARK: UICollectionViewDataSource
+  // MARK: - UICollectionViewDataSource
   
   override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return 1
@@ -36,18 +39,20 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   }
   
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MyCell.classReuseIdentifier(), forIndexPath: indexPath) as MyCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MyCell.classReuseIdentifier, forIndexPath: indexPath) as! MyCell
     cell.label.text = items[indexPath.row]
+    
+//    cell.frame = CGRect(origin: cell.frame.origin, size: CGSize(width: collectionView.bounds.size.width, height: 50))
     return cell
   }
 
-  // MARK: UICollectionViewDelegateFlowLayout
+  // MARK: - UICollectionViewDelegateFlowLayout
   
   /*
   In its capacity as the UICollectionViewDelegateFlowLayout, the view controller
   supplies sizes for cells.
   
-  But we want the cell's to be responsible for handling their own layout and sizing.
+  But we want the cells to be responsible for handling their own layout and sizing.
   
   So we ask a cell to compute the sizing for us.
   
@@ -68,13 +73,14 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
   {
+    NSLog("ENTRY: collectionView(collectionView:layout:sizeForItemAtIndexPath) called for indexPath=%@",indexPath.description)
     // NOTE: here is where we say we want cells to use the width of the collection view
     let requiredWidth = collectionView.bounds.size.width
 
     // NOTE: here is where we ask our sizing cell to compute what height it needs
-    let targetSize = CGSize(width: requiredWidth, height: 0)
     self.sizingCell.label.text = items[indexPath.row]
-    let adequateSize = self.sizingCell.preferredLayoutSizeFittingSize(targetSize)
+    let adequateSize = self.sizingCell.preferredLayoutSizeFittingWidth(requiredWidth)
+    NSLog("EXIT: collectionView(collectionView:layout:sizeForItemAtIndexPath) returning size = %@",NSStringFromCGSize(adequateSize))
     return adequateSize
   }
 }
